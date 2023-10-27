@@ -56,8 +56,6 @@ class Book:
             return True
         return False
     
-    def get_book_information(self):
-        pass
 
     def save_book_csv(self,data):
         headers = ["Title",'Author','Publication',"ISBN","Price","Quantity","Shelf"]
@@ -69,6 +67,19 @@ class Book:
             writer.writerow(data)
         print("Book informations saved to books.csv file.")
 
+
+def get_book_info_by_title_or_ISBN(book_info):
+    with open("books.csv","r") as book:
+        book_data = csv.reader(book)
+        for data in book_data:
+            if data[0] == book_info:
+                return data
+                print(data)
+                # return data
+            elif data[3]== book_info:
+                return data
+
+    book.close()
 
 # adding book to the system
 
@@ -113,6 +124,9 @@ def add_book():
     return title, author, publication_year, isbn_number, price, quantity, shelf_num
 
 
+
+
+
 def book_menu():
     print("----------------------------------------------------------------")
     print("Add New Book")
@@ -122,6 +136,7 @@ def book_menu():
     print("2. Remove Book")
     print("3. Update Book Informations")
     print("4. Return to main menu")
+    print("5. Search Book (ISBN Number or Title)")
     print("5. Exit")
     choice = int(input("Enter Choice: "))
     while choice not in range(1,6):
@@ -143,6 +158,18 @@ def book_menu():
             # return to main menu
             # menu()
             pass
+        case 5:
+            title_or_isbn = input("Enter book title or isbn number: ")
+            book = get_book_info_by_title_or_ISBN(title_or_isbn)
+            if book:
+                print("---------------------------------------------------------------------------------------")
+                print("Title \t\t Author \t\t ISBN \t\t Quantity \t\t Shelf")
+                print("---------------------------------------------------------------------------------------")
+                print(book[0],"\t\t",book[1],"\t\t", book[3], '\t\t', book[5],'\t\t',book[6])
+                print("---------------------------------------------------------------------------------------")
+            else:
+                print("---------------------------------------------------------------------------------------")
+                print("No Book Found. Try Again...")
         case _:
             exit(0)
 

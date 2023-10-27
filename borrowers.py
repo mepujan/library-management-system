@@ -34,4 +34,23 @@ class Person:
         self.mobile = mobile
     
     
-        
+def create_profile():
+    name = input("Enter Your Name: ")
+    while name is None or name == "":
+        print("Invalid Name. Try Again...")
+        name = input("Enter Your Name: ")
+    address = input("Enter your address: ")
+    while address is None or address == "":
+        print("Invalid input. Try Again...")
+        address = input("Enter your address: ")
+    email = input("Enter your address: ")
+    while email is None or email == "":
+        print("Invalid Input. Try Again...")
+        email = input("Enter your email: ")
+    mobile = input("Enter your mobile number: ")
+    while mobile is None or len(mobile) != 10:
+        print("Invalid Mobile Number. Try Again...")
+        print("Length of mobile number should be 10.")
+        mobile = input("Enter your mobile number: ")
+    
+    return name, address, email, mobile
