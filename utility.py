@@ -31,5 +31,4 @@ def delete_csv_data(csv_file,data_to_delete):
         writer = csv.writer(file)
         writer.writerows(remaining_data)
     file.close()
-    print("Data Deleted Successfully...")
 

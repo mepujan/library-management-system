@@ -1,6 +1,6 @@
 import csv
 from datetime import date , timedelta
-from utility import get_id,write_csv
+from utility import get_id,write_csv,delete_csv_data
 from books import Book
 from borrowers import Person
 
@@ -98,6 +98,14 @@ def menu():
             pass
         case 6:
             transaction_id = input("Enter Transaction Id: ")
+            transaction_details = Transaction.get_transaction_by_Id(transaction_id)
+            if transaction_details:
+                file_name = "transaction.csv"
+                delete_csv_data(file_name,transaction_details[0])
+                print("Data Deleted Successfully")
+            else:
+                print("Cannot Delete Data. Try again...")
+                
 
 
 
