@@ -1,3 +1,4 @@
+import csv
 from datetime import date , timedelta
 from utility import get_id,write_csv
 from books import Book
@@ -41,6 +42,15 @@ class Transaction:
             penalty_amount = days_exceeds.days * penalty_per_day
             return penalty_amount
         return 0
+    
+    @staticmethod
+    def get_transaction_by_Id(transaction_id):
+        with open("transaction.csv", "r") as transaction:
+            transaction_data = csv.reader(transaction)
+            for row in transaction_data:
+                if row[0] == transaction_id:
+                    return row
+
 
 
 def menu():
@@ -86,6 +96,9 @@ def menu():
             pass
         case 5:
             pass
+        case 6:
+            transaction_id = input("Enter Transaction Id: ")
+
 
 
 
