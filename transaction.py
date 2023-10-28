@@ -34,17 +34,6 @@ class Transaction:
     def set_returned_date(self,date):
         self.returned_date = date
 
-
-    # def borrow_book(self,book,user, return_date):
-    #     file_name = "transaction.csv"
-    #     headers = ["TransactionId", "Book", "User","BorrowDate", "ExpectedReturnDate","ReturnDate","fine"]
-    #     transaction = self(book,user,return_date)
-    #     data = [transaction.]
-    #     transaction.write_csv()
-
-        
-
-
     def calculate_fine(self):
         penalty_per_day = 15
         if date.today() > self.borrow_date():
@@ -55,34 +44,30 @@ class Transaction:
 
 
 def menu():
-    print("1. View All Transactions.")
-    print("2. View Transaction By Id")
-    print("3. Update Transaction")
-    print("4. Remove Transaction")
-    print("5. Borrow Book")
+    print("1. Borrow Book")
+    print("2. View All Transactions.")
+    print("3. View Transaction By Id")
+    print("4. Update Transaction")
+    print("5. Remove Transaction")
+    
 
     choice = int(input("Enter your choice: "))
     match choice:
         case 1:
-            pass
-        case 2:
-            pass
-        case 3:
-            pass
-        case 4:
-            pass
-        case 5:
             file_name = "transaction.csv"
             headers = ["TransactionId", "Book", "User","BorrowDate", "ExpectedReturnDate","ReturnDate","Penalty"]
             title_or_isbn = input("Enter book title or ISBN number: ")
-            email = input("Enter user email: ")
+           
             book_info = Book.get_book_info_by_title_or_ISBN(title_or_isbn)
             while not book_info:
                 print("Book Doesnot Exist. Try Again")
+                title_or_isbn = input("Enter book title or ISBN number: ")
                 book_info = Book.get_book_info_by_title_or_ISBN(title_or_isbn)
+            email = input("Enter user email: ")
             user_info = Person.search_user(email)
             while not user_info:
                 print("User Doesnot exist. Try Again")
+                email = input("Enter user email: ")
                 user_info = Person.search_user(email)
 
             book = Book(book_info[1],book_info[2],book_info[3],book_info[4],book_info[5],book_info[6],book_info[7])
@@ -91,6 +76,15 @@ def menu():
             transaction = Transaction(book, user)
             data = [transaction.transaction_id,book,user,transaction.borrow_date,transaction.expected_return_date,transaction.returned_date,transaction.penalty]
             write_csv(file_name,data,headers)
+
+        case 2:
+            pass
+        case 3:
+            pass
+        case 4:
+            pass
+        case 5:
+            pass
 
 
 

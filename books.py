@@ -62,19 +62,6 @@ class Book:
     
     def __str__(self):
         return self.title
-    
-
-    # def save_book_csv(self):
-    #     headers = ["Title",'Author','Publication',"ISBN","Price","Quantity","Shelf"]
-    #     csv_file = "books.csv"
-    #     data = [self.get_title(), self.get_author(), self.get_publication_year(), self.get_ISBN_number(), self.get_price(), self.get_quantity(), self.get_shelf()]
-    #     with open(csv_file, "a", newline="") as book:
-    #         writer = csv.writer(book)
-    #         if not os.path.exists(csv_file) or os.path.getsize(csv_file) == 0:
-    #             writer.writerow(headers)
-    #         writer.writerow(data)
-    #     print("Book informations saved to books.csv file.")
-
 
 
     @staticmethod
