@@ -1,4 +1,6 @@
 from books import book_menu
+from borrowers import menu as borrowers_menu
+from transaction import menu as transaction_menu
 
 def menu():
     print("----------------------------------------------------------------")
@@ -16,11 +18,9 @@ def menu():
         case 1:
             book_menu()
         case 2:
-            pass
-            # borrower_menu()
+            borrowers_menu()
         case 3:
-            pass
-            # transaction_menu()
+            transaction_menu()
         case _:
             exit(0)
 

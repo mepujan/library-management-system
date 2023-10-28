@@ -1,5 +1,9 @@
+import csv
+from utility import write_csv,get_id
+
 class Person:
     def __init__(self, name, address, email,mobile) -> None:
+        self.user_id = get_id()
         self.name = name
         self.address = address
         self.email = email
@@ -13,10 +17,10 @@ class Person:
     def get_address(self):
         return self.address
     
-    def email(self):
+    def get_email(self):
         return self.email
     
-    def mobile(self):
+    def get_mobile(self):
         return self.mobile
     
     # setter functions
@@ -32,25 +36,67 @@ class Person:
     
     def set_mobile(self, mobile):
         self.mobile = mobile
+
+    def __str__(self):
+        return self.email
+
+
+    @staticmethod
+    def search_user(email):
+        with open('person.csv','r') as persons:
+            persons_data = csv.reader(persons)
+            for data in persons_data:
+                if data[3] == email:
+                    return data
+        persons.close()
     
-    
-def create_profile():
-    name = input("Enter Your Name: ")
-    while name is None or name == "":
-        print("Invalid Name. Try Again...")
+    @staticmethod
+    def create_profile():
         name = input("Enter Your Name: ")
-    address = input("Enter your address: ")
-    while address is None or address == "":
-        print("Invalid input. Try Again...")
+        while name is None or name == "":
+            print("Invalid Name. Try Again...")
+            name = input("Enter Your Name: ")
         address = input("Enter your address: ")
-    email = input("Enter your address: ")
-    while email is None or email == "":
-        print("Invalid Input. Try Again...")
-        email = input("Enter your email: ")
-    mobile = input("Enter your mobile number: ")
-    while mobile is None or len(mobile) != 10:
-        print("Invalid Mobile Number. Try Again...")
-        print("Length of mobile number should be 10.")
+        while address is None or address == "":
+            print("Invalid input. Try Again...")
+            address = input("Enter your address: ")
+        email = input("Enter your email address: ")
+        while email is None or email == "":
+            print("Invalid Input. Try Again...")
+            email = input("Enter your email: ")
         mobile = input("Enter your mobile number: ")
+        while mobile is None or len(mobile) != 10:
+            print("Invalid Mobile Number. Try Again...")
+            print("Length of mobile number should be 10.")
+            mobile = input("Enter your mobile number: ")
+        
+        return name, address, email, mobile
     
-    return name, address, email, mobile
+def menu():
+    print("Borrowers Menu")
+    print("1. Add User")
+    print("2. Update User Info")
+    print("3. Remove User")
+    print("4. Get User Transaction")
+    print("5. Exit")
+
+    choice = int(input("Enter your choice: "))
+    match choice:
+        case 1:
+            name, address,email,mobile = Person.create_profile()
+            person = Person(name,address,email,mobile)
+            data = [person.user_id,name, address,email,mobile]
+            file_name = "person.csv"
+            headers = ["UserId","Name",'Address','Email',"Mobile"]
+            write_csv(file_name,data,headers)
+        case 2:
+            pass
+        case 3:
+            pass
+        case 4:
+            pass
+        case 5:
+            exit(0)
+
+        case _:
+            print("Invalid Input. Try Again.")
