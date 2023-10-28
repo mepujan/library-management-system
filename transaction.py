@@ -93,11 +93,25 @@ def menu():
         case 3:
             pass
         case 4:
-            pass
+            transaction_id = input("Enter Transaction Id: ")
+            transaction = Transaction.get_transaction_by_Id(transaction_id)
+            if transaction:
+                print("---------------------------------------------------------------------------------------")
+                print("Book \t\t User \t\t\t Borrow Date \t\t Expected Return Date \t Return Date \t\t Penalty")
+                print("---------------------------------------------------------------------------------------")
+                print(transaction[1],"\t\t", transaction[2], '\t\t', transaction[3],'\t\t',transaction[4],'\t\t\t',transaction[5],'\t\t',transaction[6])
+                print("---------------------------------------------------------------------------------------")
+            else:
+                print("---------------------------------------------------------------------------------------")
+                print("No Transaction Found. Try Again...")
         case 5:
             pass
         case 6:
             transaction_id = input("Enter Transaction Id: ")
+            while transaction_id is None or transaction_id == "":
+                print("Invalid Input. Try Again...")
+                transaction_id = input("Enter Transaction Id: ")
+                
             transaction_details = Transaction.get_transaction_by_Id(transaction_id)
             if transaction_details:
                 file_name = "transaction.csv"
