@@ -45,10 +45,10 @@ class Transaction:
 
 def menu():
     print("1. Borrow Book")
-    print("2. View All Transactions.")
-    print("3. View Transaction By Id")
-    print("4. Update Transaction")
-    print("5. Remove Transaction")
+    print("3. View All Transactions.")
+    print("4. View Transaction By Id")
+    print("5. Update Transaction")
+    print("6. Remove Transaction")
     
 
     choice = int(input("Enter your choice: "))
@@ -72,10 +72,11 @@ def menu():
 
             book = Book(book_info[1],book_info[2],book_info[3],book_info[4],book_info[5],book_info[6],book_info[7])
             user = Person(user_info[1],user_info[2],user_info[3],user_info[4])
-            
-            transaction = Transaction(book, user)
-            data = [transaction.transaction_id,book,user,transaction.borrow_date,transaction.expected_return_date,transaction.returned_date,transaction.penalty]
-            write_csv(file_name,data,headers)
+            if book.does_book_exist():
+                transaction = Transaction(book, user)
+                data = [transaction.transaction_id,book,user,transaction.borrow_date,transaction.expected_return_date,transaction.returned_date,transaction.penalty]
+                write_csv(file_name,data,headers)
+            print("No Book Available At The Moment. Please Come back later.")
 
         case 2:
             pass

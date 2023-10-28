@@ -17,3 +17,19 @@ def get_id():
     code = str(uuid.uuid4()).replace("-","")[:4]
     return code
 
+def delete_csv_data(csv_file,data_to_delete):
+    remaining_data = []
+    with open(csv_file,"r",newline="") as file:
+        reader = csv.reader(file)
+        for row in reader:
+            if data_to_delete not in row:
+                remaining_data.append(row)
+    
+    file.close()
+
+    with open(csv_file,'w',newline="") as file:
+        writer = csv.writer(file)
+        writer.writerows(remaining_data)
+    file.close()
+    print("Data Deleted Successfully...")
+

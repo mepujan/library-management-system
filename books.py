@@ -1,6 +1,6 @@
 import csv
 import os
-from utility import write_csv,get_id
+from utility import write_csv,get_id,delete_csv_data
 # from main_menu import menu
 
 class Book:
@@ -69,6 +69,7 @@ class Book:
         with open("books.csv","r") as book:
             book_data = csv.reader(book)
             for data in book_data:
+                print("data ->",data)
                 if data[1] == book_info:
                     return data
                 elif data[4]== book_info:
@@ -84,19 +85,6 @@ class Book:
             #     books = list(book_data)
             #     for data in books:
             #         if 
-
-    @staticmethod
-    def delete_book(self,isbn_num):
-            pass
-    
-    def borrow_book(self,title):
-        title_exits = Book.get_book_info_by_title_or_ISBN(title)
-        if title_exits:
-            has_book = self.does_book_exist()
-            if has_book:
-                pass
-            else:
-                pass
                 
 
 
@@ -182,9 +170,13 @@ def book_menu():
             headers = ["BookId","Title",'Author','Publication',"ISBN","Price","Quantity","Shelf"]
             write_csv(file_name,data,headers)
         case 2:
-            # remove book
-            Book.delete_book(book)
-            pass
+            file_name = "books.csv"
+            title_or_isbn = input("Enter title or isbn number of book: ")
+            data = Book.get_book_info_by_title_or_ISBN(title_or_isbn)
+            if data: 
+                delete_csv_data(file_name,data[0])
+            else:
+                print("Book Doesnot Exist in Database to Delete. Try Again...")
         case 3: 
             # update book
             Book.update_book_info(book)
