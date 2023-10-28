@@ -69,24 +69,13 @@ class Book:
         with open("books.csv","r") as book:
             book_data = csv.reader(book)
             for data in book_data:
-                print("data ->",data)
                 if data[1] == book_info:
                     return data
                 elif data[4]== book_info:
                     return data
 
         book.close()
-    @staticmethod
-    def update_book_info(isbn_num):
-            pass
-            # books = []
-            # with open("books.csv", "r") as book:
-            #     book_data = csv.reader(book)
-            #     books = list(book_data)
-            #     for data in books:
-            #         if 
-                
-
+            
 
 # adding book to the system
     @staticmethod
