@@ -15,27 +15,6 @@ class Transaction:
         self.returned_date = returned_date
         self.penalty = 0
 
-    # getter
-
-    def get_borrow_date(self):
-        return self.borrow_date
-
-    def get_expected_return_date(self):
-        return self.expected_return_date
-
-    def get_return_date(self):
-        return self.returned_date
-
-    # setter
-    def set_borrow_date(self, date):
-        self.borrow_date = date
-
-    def set_expected_return_date(self, date):
-        self.expected_return_date = date
-
-    def set_returned_date(self, date):
-        self.returned_date = date
-
     @staticmethod
     def calculate_penalty(expected_date, returned_date):
         penalty_per_day = 15
@@ -74,13 +53,21 @@ class Transaction:
             for row in rows:
                 writer.writerow(row)
 
+    @staticmethod
+    def display(transaction):
+        print("---------------------------------------------------------------------------------------")
+        print("Book \t\t User \t\t\t Borrow Date \t\t Expected Return Date \t Return Date \t\t Penalty")
+        print("---------------------------------------------------------------------------------------")
+        print(transaction[1], "\t\t", transaction[2], '\t\t', transaction[3],
+              '\t\t', transaction[4], '\t\t\t', transaction[5], '\t\t', transaction[6])
+        print("---------------------------------------------------------------------------------------")
+
 
 def menu():
     print("1. Borrow Book")
-    print("2. View All Transactions.")
-    print("3. View Transaction By Id")
-    print("4. Update Transaction")
-    print("5. Remove Transaction")
+    print("2. View Transaction By Id")
+    print("3. Update Transaction")
+    print("4. Remove Transaction")
 
     choice = int(input("Enter your choice: "))
     match choice:
@@ -114,28 +101,16 @@ def menu():
             print("No Book Available At The Moment. Please Come back later.")
 
         case 2:
-            pass
-
-        case 3:
             transaction_id = input("Enter Transaction Id: ")
             transaction = Transaction.get_transaction_by_Id(transaction_id)
             if transaction:
-                print(
-                    "---------------------------------------------------------------------------------------")
-                print(
-                    "Book \t\t User \t\t\t Borrow Date \t\t Expected Return Date \t Return Date \t\t Penalty")
-                print(
-                    "---------------------------------------------------------------------------------------")
-                print(transaction[1], "\t\t", transaction[2], '\t\t', transaction[3],
-                      '\t\t', transaction[4], '\t\t\t', transaction[5], '\t\t', transaction[6])
-                print(
-                    "---------------------------------------------------------------------------------------")
+                Transaction.display(transaction)
             else:
                 print(
                     "---------------------------------------------------------------------------------------")
                 print("No Transaction Found. Try Again...")
 
-        case 4:
+        case 3:
             transaction_id = input("Enter transaction Id: ")
             transaction = Transaction.get_transaction_by_Id(transaction_id)
             if transaction:
@@ -154,7 +129,7 @@ def menu():
             else:
                 print("No Transaction Found. Try Again...")
 
-        case 5:
+        case 4:
             transaction_id = input("Enter Transaction Id: ")
             while transaction_id is None or transaction_id == "":
                 print("Invalid Input. Try Again...")

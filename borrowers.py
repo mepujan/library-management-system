@@ -10,34 +10,6 @@ class Person:
         self.email = email
         self.mobile = mobile
 
-    # getter functions
-
-    def get_name(self):
-        return self.name
-
-    def get_address(self):
-        return self.address
-
-    def get_email(self):
-        return self.email
-
-    def get_mobile(self):
-        return self.mobile
-
-    # setter functions
-
-    def set_name(self, name):
-        self.name = name
-
-    def set_address(self, address):
-        self.address = address
-
-    def set_email(self, email):
-        self.email = email
-
-    def set_mobile(self, mobile):
-        self.mobile = mobile
-
     def __str__(self):
         return self.email
 
