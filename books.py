@@ -166,9 +166,8 @@ def book_menu():
     print("1. Add Book")
     print("2. Remove Book")
     print("3. Update Book Informations")
-    print("4. Borrow Book")
-    print("5. Search Book (ISBN Number or Title)")
-    print("6. Exit")
+    print("4. Search Book (ISBN Number or Title)")
+    print("5. Exit")
     choice = int(input("Enter Choice: "))
     while choice not in range(1, 6):
         print("Invalid Input. Try Again...")
@@ -209,20 +208,8 @@ def book_menu():
                 Book.update_book_data("books.csv", book[0], new_data)
             else:
                 print("No Book Exist with that ISBN Number. Try Again...")
-        case 4:
-            title_or_isbn = input("Enter the book title or isbn number: ")
-            while title_or_isbn is not None and title_or_isbn == "":
-                print("Invalid Input. Try Again...")
-                title_or_isbn = input("Enter the book title or isbn number: ")
-            book_data = Book.get_book_info_by_title_or_ISBN()
-            book = Book(book_data[0], book_data[1], book_data[2],
-                        book_data[3], book_data[4], book_data[5], book_data[6])
-            if book.does_book_exist():
-                pass
-            else:
-                print("Book Doesnot Exist. Try Again...")
 
-        case 5:
+        case 4:
             title_or_isbn = input("Enter book title or isbn number: ")
             book = Book.get_book_info_by_title_or_ISBN(title_or_isbn)
             if book:

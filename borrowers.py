@@ -1,5 +1,5 @@
 import csv
-from utility import write_csv, get_id
+from utility import write_csv, get_id, delete_csv_data
 
 
 class Person:
@@ -96,7 +96,14 @@ def menu():
             else:
                 print("No user found.Try Again...")
         case 3:
-            pass
+            file_name = 'person.csv'
+            email = input("Enter the email of user you want to delete: ")
+            user = Person.search_user(email)
+            if user:
+                delete_csv_data(file_name, user[0])
+                print("User Deleted Successfully")
+            else:
+                print("Cannot Delete Data. Try Again...")
         case 4:
             pass
         case 5:
