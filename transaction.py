@@ -55,9 +55,7 @@ class Transaction:
 
     @staticmethod
     def display(transaction):
-        print("---------------------------------------------------------------------------------------")
-        print("Book \t\t User \t\t\t Borrow Date \t\t Expected Return Date \t Return Date \t\t Penalty")
-        print("---------------------------------------------------------------------------------------")
+
         print(transaction[1], "\t\t", transaction[2], '\t\t', transaction[3],
               '\t\t', transaction[4], '\t\t\t', transaction[5], '\t\t', transaction[6])
         print("---------------------------------------------------------------------------------------")
@@ -104,6 +102,12 @@ def menu():
             transaction_id = input("Enter Transaction Id: ")
             transaction = Transaction.get_transaction_by_Id(transaction_id)
             if transaction:
+                print(
+                    "---------------------------------------------------------------------------------------")
+                print(
+                    "Book \t\t User \t\t\t Borrow Date \t\t Expected Return Date \t Return Date \t\t Penalty")
+                print(
+                    "---------------------------------------------------------------------------------------")
                 Transaction.display(transaction)
             else:
                 print(

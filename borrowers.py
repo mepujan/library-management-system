@@ -47,6 +47,17 @@ class Person:
                 writer.writerow(row)
 
     @staticmethod
+    def get_user_transaction(email):
+        with open('transaction.csv', 'r', newline="") as transaction:
+            data = csv.reader(transaction)
+            datas = []
+            if data:
+                for row in data:
+                    if email in row:
+                        datas.append(row)
+            return datas
+
+    @staticmethod
     def create_profile():
         name = input("Enter Your Name: ")
         while name is None or name == "":
@@ -105,7 +116,23 @@ def menu():
             else:
                 print("Cannot Delete Data. Try Again...")
         case 4:
-            pass
+            email = input("Enter User Email to Extract all Transaction: ")
+            history = Person.get_user_transaction(email)
+            if history:
+                print(
+                    "---------------------------------------------------------------------------------------")
+                print(
+                    "Book \t\t User \t\t\t Borrow Date \t\t Expected Return Date \t Return Date \t\t Penalty")
+                print(
+                    "---------------------------------------------------------------------------------------")
+                for transaction in history:
+                    print(transaction[1], "\t\t", transaction[2], '\t\t', transaction[3],
+                          '\t\t', transaction[4], '\t\t\t', transaction[5], '\t\t', transaction[6])
+
+                    print(
+                        "---------------------------------------------------------------------------------------")
+            else:
+                print("No Transaction Found. Try Again...")
         case 5:
             exit(0)
 
