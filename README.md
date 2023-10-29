@@ -4,8 +4,6 @@
 
 This project is console menu based project which provides some features of Library Management System such as borrowing books, keeping track of books and user transactions. This project also calculate the late fee for those who return book late.
 
-> Note : No any external libraries are needed to run this project
-
 ## Feature Imposed
 
 1. Adding,Removing and Updating Book, User and Transaction
@@ -22,3 +20,5 @@ This project is console menu based project which provides some features of Libra
    `cd path-to-library-management-system`
 3. Run the project using command
    `python main_menu.py`
+
+> Note : No any external libraries are needed to run this project

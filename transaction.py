@@ -60,12 +60,33 @@ class Transaction:
               '\t\t', transaction[4], '\t\t\t', transaction[5], '\t\t', transaction[6])
         print("---------------------------------------------------------------------------------------")
 
+    @staticmethod
+    def extend_return_date(id, new_date):
+        with open('transaction.csv', "r", newline="") as file:
+            reader = csv.DictReader(file)
+            rows = []
+            for row in reader:
+                row_values = row.values()
+                if id in row_values:
+                    row['ExpectedReturnDate'] = new_date
+                    rows.append(row)
+                else:
+                    rows.append(row)
+        headers = ["TransactionId", "Book", "User", "BorrowDate",
+                   "ExpectedReturnDate", "ReturnDate", "Penalty"]
+        with open('transaction.csv', 'w', newline="") as file:
+            writer = csv.DictWriter(file, fieldnames=headers)
+            writer.writeheader()
+            for row in rows:
+                writer.writerow(row)
+
 
 def menu():
     print("1. Borrow Book")
     print("2. View Transaction By Id")
     print("3. Update Transaction")
     print("4. Remove Transaction")
+    print("5. Extend Return Date")
 
     choice = int(input("Enter your choice: "))
     match choice:
@@ -120,8 +141,17 @@ def menu():
             if transaction:
                 print("Enter Book Returned date")
                 year = int(input("Enter Year: "))
+                while year < 2023:
+                    print("Invalid Year. Try Again.")
+                    year = int(input("Enter Year: "))
                 month = int(input("Enter Month: "))
+                while month not in range(1, 13):
+                    print("Month should be in range 1 to 12 inclusive. Try Again...")
+                    month = int(input("Enter Month: "))
                 day = int(input("Enter Day: "))
+                while day not in range(1, 31):
+                    print("Month consist of 30 days. Try Again...")
+                    day = int(input("Enter Day: "))
                 returned_date = date(year, month, day)
                 expected_date = datetime.strptime(
                     transaction[4], "%Y-%m-%d").date()
@@ -147,3 +177,27 @@ def menu():
                 print("Data Deleted Successfully")
             else:
                 print("Cannot Delete Data. Try again...")
+
+        case 5:
+            transaction_id = input("Enter transaction id: ")
+            transaction = Transaction.get_transaction_by_Id(transaction_id)
+            if transaction:
+                print("Enter new expected return date: ")
+                year = int(input("Year: "))
+                while year < 2023:
+                    print("Invalid Year. Currently its 2023. Try again...")
+                    year = int(input("Year: "))
+                month = int(input("month: "))
+                while month not in range(1, 12):
+                    print("Month should be in range 1 to 12")
+                    month = int(input("month: "))
+                day = int(input("Day: "))
+                while day not in range(1, 31):
+                    print("Days should be in between 1 to 30. Try Again...")
+                    day = int(input("Day: "))
+
+                new_expected_date = date(year, month, day)
+                Transaction.extend_return_date(
+                    transaction[0], new_expected_date)
+            else:
+                print("No Transaction Found. Try Again...")
