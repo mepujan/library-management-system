@@ -233,8 +233,8 @@ def book_menu():
                 print("Title \t\t Author \t\t ISBN \t\t Quantity \t\t Shelf")
                 print(
                     "---------------------------------------------------------------------------------------")
-                print(book[0], "\t\t", book[1], "\t\t",
-                      book[3], '\t\t', book[5], '\t\t', book[6])
+                print(book[1], "\t\t", book[2], "\t\t",
+                      book[4], '\t\t', book[6], '\t\t', book[7])
                 print(
                     "---------------------------------------------------------------------------------------")
             else:
