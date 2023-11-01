@@ -15,6 +15,8 @@ class Person:
 
     @staticmethod
     def search_user(email):
+        '''This method will filter out the borrowers informations using email provided by user
+         and return that informations if user is present '''
         with open('person.csv', 'r') as persons:
             persons_data = csv.reader(persons)
             for data in persons_data:
@@ -24,6 +26,10 @@ class Person:
 
     @staticmethod
     def update_person_data(file_name, id, new_data):
+        '''
+            This function takes file_name, id and new_data as a parameter and
+            update the existing data with the new data.
+        '''
         with open(file_name, "r", newline="") as file:
             reader = csv.DictReader(file)
             rows = []
@@ -48,6 +54,9 @@ class Person:
 
     @staticmethod
     def get_user_transaction(email):
+        '''
+        This method takes email as an argument and returns all the user transaction as a list.
+        '''
         with open('transaction.csv', 'r', newline="") as transaction:
             data = csv.reader(transaction)
             datas = []
@@ -59,6 +68,8 @@ class Person:
 
     @staticmethod
     def create_profile():
+        '''This functions ask different informations from the user and return that informations to the program'''
+
         name = input("Enter Your Name: ")
         while name is None or name == "":
             print("Invalid Name. Try Again...")
@@ -81,6 +92,7 @@ class Person:
 
 
 def menu():
+    # menu of borrowers module
     print("Borrowers Menu")
     print("1. Add User")
     print("2. Update User Info")

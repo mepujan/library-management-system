@@ -64,6 +64,11 @@ class Book:
 
     @staticmethod
     def get_book_info_by_title_or_ISBN(book_info):
+        '''
+            This function takes book_info as a parameter and
+            returns the information related to book if it existed in csv file
+            otherwise None is returned.
+        '''
         with open("books.csv", "r") as book:
             book_data = csv.reader(book)
             for data in book_data:
@@ -76,6 +81,10 @@ class Book:
 
     @staticmethod
     def update_book_data(file_name, id, new_data):
+        '''
+            This function takes file_name, id and new_data as a parameter and
+            update the existing data with the new data.
+        '''
         with open(file_name, "r", newline="") as file:
             reader = csv.DictReader(file)
             rows = []
@@ -107,6 +116,10 @@ class Book:
 
     @staticmethod
     def add_book():
+        '''
+        This method will takes book different informations from the user and return those informations.
+        '''
+
         title = input("Enter Title: ")
 
         while title is None or title == "":
@@ -156,6 +169,8 @@ class Book:
             shelf_num = int(input("Enter shelf number: "))
 
         return title, author, publication_year, isbn_number, price, quantity, shelf_num
+
+# this function will print the menu item related to book
 
 
 def book_menu():

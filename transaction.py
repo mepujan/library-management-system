@@ -17,6 +17,9 @@ class Transaction:
 
     @staticmethod
     def calculate_penalty(expected_date, returned_date):
+        '''
+            This method calculate the penalty based on the expected date and returned date
+        '''
         penalty_per_day = 15
         if expected_date < returned_date:
             days_exceeds = returned_date - expected_date
@@ -26,6 +29,10 @@ class Transaction:
 
     @staticmethod
     def get_transaction_by_Id(transaction_id):
+        '''
+            This method takes transaction_id as a parameter and returns the whole transaction informations
+            from csv file
+        '''
         with open("transaction.csv", "r") as transaction:
             transaction_data = csv.reader(transaction)
             for row in transaction_data:
@@ -34,6 +41,10 @@ class Transaction:
 
     @staticmethod
     def update_transaction_data(file_name, id, data):
+        '''
+            This function takes file_name, id and data as a parameter and
+            update the existing data with the new data.
+        '''
         with open(file_name, "r", newline="") as file:
             reader = csv.DictReader(file)
             rows = []
@@ -55,6 +66,7 @@ class Transaction:
 
     @staticmethod
     def display(transaction):
+        # this method display the transaction details in tabular format
 
         print(transaction[1], "\t\t", transaction[2], '\t\t', transaction[3],
               '\t\t', transaction[4], '\t\t\t', transaction[5], '\t\t', transaction[6])
@@ -62,6 +74,9 @@ class Transaction:
 
     @staticmethod
     def extend_return_date(id, new_date):
+        '''This method takes id and new date as parameter and extend the expected return date of the book for
+        that user.'''
+
         with open('transaction.csv', "r", newline="") as file:
             reader = csv.DictReader(file)
             rows = []
@@ -82,6 +97,7 @@ class Transaction:
 
 
 def menu():
+    # menu for transaction class
     print("1. Borrow Book")
     print("2. View Transaction By Id")
     print("3. Update Transaction")

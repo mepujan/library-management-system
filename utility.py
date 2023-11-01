@@ -3,7 +3,11 @@ import csv
 import uuid
 
 
+# function that writes the data in csv file
 def write_csv(file_name, data, headers):
+    '''This function takes three parameters namely file_name, data and headers and saves
+    the data in csv file along with the specific headers. '''
+
     headers = headers
     csv_file = file_name
     with open(csv_file, "a", newline="") as book:
@@ -15,12 +19,17 @@ def write_csv(file_name, data, headers):
     print("Informations saved to {} file.".format(file_name))
 
 
+# function returns the unique code of length 4
 def get_id():
     code = str(uuid.uuid4()).replace("-", "")[:4]
     return code
 
 
+# function that deletes the data from the csv file
 def delete_csv_data(csv_file, data_to_delete):
+    '''
+        This function takes two parameters namely csv file name and id of data to delete
+    '''
     remaining_data = []
     with open(csv_file, "r", newline="") as file:
         reader = csv.reader(file)
